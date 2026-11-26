@@ -12,28 +12,11 @@ window.SHOWS = [
   }
 ];
 
-// Singles show as big cards in the Music section.
+// Music. Each single gets an embedded Spotify player.
+// spotifyTrack = the ID from the track's share link: open.spotify.com/track/<ID>
 window.SINGLES = [
-  {
-    title: "Day Drinking",
-    blurb: "Count us in! We're day drinking!",
-    src: "assets/audio/day-drinking.mp3",
-    cover: "assets/img/day-drinking.jpg"
-  },
-  {
-    title: "Tango",
-    blurb: "So in love that I could tango!",
-    src: "assets/audio/tango.mp3",
-    cover: "assets/img/tango.png"
-  }
-];
-
-// Demos show as a track list under the singles.
-window.DEMOS = [
-  { title: "Breakdown (Demo)", src: "assets/audio/breakdown-demo.mp3" },
-  { title: "Not Alone (Demo)", src: "assets/audio/not-alone-demo.mp3" },
-  { title: "Covered In Flies (Demo)", src: "assets/audio/covered-in-flies-demo.mp3" },
-  { title: "Dance The Night Away (Demo)", src: "assets/audio/dance-the-night-away-demo.mp3" }
+  { title: "Day Drinking", blurb: "Count us in! We're day drinking!", cover: "assets/img/day-drinking.jpg", spotifyTrack: "5WrXErjuQPLsifnYxm6zQK" },
+  { title: "Tango", blurb: "So in love that I could tango!", cover: "assets/img/tango.png", spotifyTrack: "6rz2kQ3eJBNOxC35NOLvTF" }
 ];
 
 // Photos: drop files in assets/img/gallery/ and list them here.
