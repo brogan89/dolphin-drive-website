@@ -35,11 +35,15 @@ Open http://localhost:8420
 3. On GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions.** The workflow in `.github/workflows/pages.yml` deploys every push to `main`. (Don't use "Deploy from a branch": it serves Git LFS pointer files instead of the real audio and images.)
 4. Site goes live at `https://<your-username>.github.io/dolphin-drive-website/` in 1–2 minutes.
 
-## Use dolphindrive.band
+## Custom domain: dolphindrive.band
 
-1. **Settings → Pages → Custom domain:** enter `dolphindrive.band`, Save (this adds a `CNAME` file to the repo).
-2. At your domain registrar, set DNS:
-   - `A` records for `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - `CNAME` record for `www`: `<your-username>.github.io`
-3. Once the DNS check passes, tick **Enforce HTTPS**.
-4. Only cancel Bandzoogle after the new site loads on the domain.
+GitHub side is set (Settings → Pages → Custom domain). No `CNAME` file needed with Actions deploys.
+
+DNS for dolphindrive.band is hosted by Bandzoogle (nameservers `dns1-4.sitezoogle.com`). In Bandzoogle's domain/DNS settings:
+
+- `A` records for `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (remove the old `172.65.197.38` A and the AAAA record)
+- `CNAME` record for `www`: `brogan89.github.io`
+
+Then tick **Enforce HTTPS** in Settings → Pages once the DNS check passes.
+
+If Bandzoogle is also the registrar, transfer the domain (or move DNS to another provider) before cancelling Bandzoogle, or the domain goes with it.
