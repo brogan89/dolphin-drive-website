@@ -17,10 +17,10 @@ Images are stored with [Git LFS](https://git-lfs.com) (see `.gitattributes`). Ru
 ## Preview locally
 
 ```bash
-python3 -m http.server 8420
+just run
 ```
 
-Open http://localhost:8420
+Serves the site on http://localhost:8420 and opens it in your browser. `just run 9000` uses another port. Ctrl+C stops it. (Needs [just](https://github.com/casey/just): `brew install just`.)
 
 ## First-time deploy to GitHub Pages
 
