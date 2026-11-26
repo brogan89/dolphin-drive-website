@@ -6,7 +6,7 @@ Static site (plain HTML/CSS/JS, no build step) for GitHub Pages.
 
 Everything you'll normally change is in `data.js`:
 
-- **Add a show:** add an entry to `SHOWS`. Date format is `"YYYY-MM-DDTHH:MM"` in NZ time. Shows move to "Past shows" by themselves the morning after.
+- **Add a show:** add an entry to `SHOWS`. Date format is `"YYYY-MM-DDTHH:MM"` in NZ time. A show disappears 24 hours after its start time, and the Shows section hides itself when none are left.
 - **Add a single:** put the cover art in `assets/img/`, then add it to `SINGLES`. Cards link to Spotify; demos live on Demoify, so there's nothing to upload here.
 - **Add photos:** put them in `assets/img/gallery/` and add the filename to `PHOTOS`.
 

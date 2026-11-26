@@ -118,7 +118,6 @@ main > section { max-width: 1100px; margin: 0 auto; padding: clamp(3rem, 8vw, 6r
 .flyer-date span { display: block; font-size: .5em; color: var(--ink); }
 .flyer h3 { font-family: var(--body); font-weight: 700; font-size: 1.35rem; line-height: 1.2; margin-bottom: .5rem; }
 .flyer p { margin: 0; }
-.flyer.empty h3 { font-family: var(--head); font-weight: 400; }
 .stamp {
   display: inline-block; margin-top: 1.25rem;
   border: 3px solid var(--blood); color: var(--blood);
@@ -128,11 +127,6 @@ main > section { max-width: 1100px; margin: 0 auto; padding: clamp(3rem, 8vw, 6r
 .stamp:hover { background: var(--blood); color: var(--bone); }
 
 .wall { position: relative; }
-.past { margin-top: 3rem; }
-.past summary { cursor: pointer; font-weight: 700; color: var(--nicotine); }
-.past ol { list-style: none; padding: 0; margin: 1rem 0 0; }
-.past li { padding: .4rem 0; border-bottom: 1px dashed var(--smoke); }
-.past time { color: var(--nicotine); margin-right: .75rem; }
 
 /* ---------- Music ---------- */
 .singles { display: grid; gap: 3rem; margin-top: 2rem; }

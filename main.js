@@ -2,32 +2,26 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 // ---------- Shows ----------
-const now = new Date();
-const shows = SHOWS.map(s => ({ ...s, when: new Date(s.date) })).sort((a, b) => a.when - b.when);
-// A show counts as upcoming until 6 hours after its start time.
-const isPast = s => s.when.getTime() + 6 * 3600e3 < now.getTime();
-const upcoming = shows.filter(s => !isPast(s));
-const past = shows.filter(isPast).reverse();
+// A show stays listed until 24 hours after its start time, then drops off.
+const cutoff = Date.now() - 24 * 3600e3;
+const upcoming = SHOWS.map(s => ({ ...s, when: new Date(s.date) }))
+  .filter(s => s.when.getTime() > cutoff)
+  .sort((a, b) => a.when - b.when);
 
 const day = d => d.toLocaleDateString("en-NZ", { weekday: "short" });
 const date = d => d.toLocaleDateString("en-NZ", { day: "numeric", month: "short" });
 const time = d => d.toLocaleTimeString("en-NZ", { hour: "numeric", minute: "2-digit" });
 
-$("upcoming").innerHTML = upcoming.length
-  ? upcoming.map(s => `
-    <li class="flyer">
-      <p class="flyer-date"><span>${day(s.when)}</span> ${date(s.when)}</p>
-      <h3>${esc(s.title)}</h3>
-      <p>${esc(s.venue)}, ${esc(s.city)}<br>Doors ${time(s.when)}</p>
-      ${s.link ? `<a class="stamp" href="${esc(s.link)}" target="_blank" rel="noopener">Get tickets</a>` : ""}
-    </li>`).join("")
-  : `<li class="flyer empty"><h3>No shows booked right now</h3><p>Follow us on Instagram to hear first.</p></li>`;
+// No shows left: hide the whole section and its nav link.
+$("shows").hidden = $("nav-shows").hidden = !upcoming.length;
 
-if (past.length) {
-  $("past-wrap").hidden = false;
-  $("past").innerHTML = past.map(s =>
-    `<li><time datetime="${esc(s.date)}">${s.when.toLocaleDateString("en-NZ", { day: "numeric", month: "short", year: "numeric" })}</time> ${esc(s.title)}, ${esc(s.venue)}, ${esc(s.city)}</li>`).join("");
-}
+$("upcoming").innerHTML = upcoming.map(s => `
+  <li class="flyer">
+    <p class="flyer-date"><span>${day(s.when)}</span> ${date(s.when)}</p>
+    <h3>${esc(s.title)}</h3>
+    <p>${esc(s.venue)}, ${esc(s.city)}<br>Doors ${time(s.when)}</p>
+    ${s.link ? `<a class="stamp" href="${esc(s.link)}" target="_blank" rel="noopener">Get tickets</a>` : ""}
+  </li>`).join("");
 
 // ---------- Music ----------
 $("singles").innerHTML = SINGLES.map(t => `

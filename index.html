@@ -15,11 +15,11 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a class="skip" href="#shows">Skip to shows</a>
+  <a class="skip" href="#main">Skip to content</a>
 
   <header class="top">
     <nav aria-label="Main">
-      <a href="#shows">Shows</a>
+      <a href="#shows" id="nav-shows">Shows</a>
       <a href="#music">Music</a>
       <a href="#photos">Photos</a>
       <a href="#about">About</a>
@@ -42,15 +42,11 @@
     </ul>
   </section>
 
-  <main>
+  <main id="main">
     <section id="shows" class="wall">
       <h2>Shows</h2>
       <p class="lede">Up and coming shows. More to be announced soon.</p>
       <ol class="flyers" id="upcoming"></ol>
-      <details class="past" id="past-wrap" hidden>
-        <summary>Past shows</summary>
-        <ol id="past"></ol>
-      </details>
     </section>
 
     <section id="music">

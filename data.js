@@ -1,6 +1,7 @@
 // Edit this file to update the site. No build step: commit and push, GitHub Pages does the rest.
 
-// Shows: date is local NZ time, "YYYY-MM-DDTHH:MM". Past shows move to "Past shows" automatically.
+// Shows: date is local NZ time, "YYYY-MM-DDTHH:MM". Each show disappears 24 hours after it starts;
+// with none left, the Shows section and its nav link hide themselves.
 // link is optional (tickets / Facebook event).
 window.SHOWS = [
   {
