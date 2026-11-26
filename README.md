@@ -12,6 +12,8 @@ Everything you'll normally change is in `data.js`:
 
 Commit and push. The live site updates in about a minute.
 
+Audio and images are stored with [Git LFS](https://git-lfs.com) (see `.gitattributes`). Run `git lfs install` once on any machine before cloning.
+
 ## Preview locally
 
 ```bash
@@ -30,7 +32,7 @@ Open http://localhost:8420
    git remote add origin https://github.com/<your-username>/dolphin-drive-website.git
    git push -u origin main
    ```
-3. On GitHub: **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: `main` / `(root)` → Save.**
+3. On GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions.** The workflow in `.github/workflows/pages.yml` deploys every push to `main`. (Don't use "Deploy from a branch": it serves Git LFS pointer files instead of the real audio and images.)
 4. Site goes live at `https://<your-username>.github.io/dolphin-drive-website/` in 1–2 minutes.
 
 ## Use dolphindrive.band
