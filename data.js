@@ -16,7 +16,7 @@ window.SHOWS = [
 // spotifyTrack = the ID from the track's share link: open.spotify.com/track/<ID>
 window.SINGLES = [
   { title: "Day Drinking", blurb: "Count us in! We're day drinking!", cover: "assets/img/day-drinking.jpg", spotifyTrack: "5WrXErjuQPLsifnYxm6zQK" },
-  { title: "Tango", blurb: "So in love that I could tango!", cover: "assets/img/tango.png", spotifyTrack: "6rz2kQ3eJBNOxC35NOLvTF" }
+  { title: "Tango", blurb: "So in love that I could tango!", cover: "assets/img/tango.jpg", spotifyTrack: "6rz2kQ3eJBNOxC35NOLvTF" }
 ];
 
 // Photos: drop files in assets/img/gallery/ and list them here.
