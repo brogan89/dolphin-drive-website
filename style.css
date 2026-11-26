@@ -1,0 +1,244 @@
+:root {
+  --bruise: #1b2321;   /* wall: dark teal-black from the Tango artwork */
+  --bone: #f2dcc4;     /* logo cream */
+  --blood: #b3261e;    /* logo red */
+  --nicotine: #c9a46a; /* the smoke; used for tape */
+  --smoke: #6e6e6e;
+  --ink: #000;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --torn: polygon(0 3%, 6% 0, 14% 2%, 22% 0, 31% 3%, 40% 1%, 52% 3%, 61% 0, 70% 2%, 80% 0, 91% 3%, 100% 1%,
+                  99% 22%, 100% 47%, 98% 71%, 100% 98%, 90% 100%, 79% 97%, 68% 100%, 57% 98%, 45% 100%,
+                  33% 97%, 22% 100%, 11% 98%, 2% 100%, 0 76%, 2% 51%, 0 26%);
+  --head: "Rubik Dirt", Impact, sans-serif;
+  --body: "Courier Prime", "Courier New", monospace;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+body {
+  margin: 0;
+  background: var(--bruise);
+  color: var(--bone);
+  font: 1.0625rem/1.6 var(--body);
+  overflow-x: hidden;
+}
+/* Photocopy grain over everything */
+body::after {
+  content: "";
+  position: fixed; inset: 0;
+  background: var(--grain);
+  opacity: .35;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 100;
+}
+body.has-player { padding-bottom: 5.5rem; }
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px dashed var(--blood); outline-offset: 3px; }
+
+h2, h3 { font-family: var(--head); font-weight: 400; line-height: 1; margin: 0; }
+h2 { font-size: clamp(3rem, 9vw, 6rem); color: var(--bone); transform: rotate(-2deg); margin-bottom: .5rem; }
+h3 { font-size: 1.75rem; }
+
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 200; background: var(--bone); color: var(--ink); padding: .5rem; }
+
+/* ---------- Nav ---------- */
+.top {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--ink);
+  border-bottom: 3px solid var(--blood);
+}
+.top nav { display: flex; justify-content: center; gap: clamp(1rem, 4vw, 3rem); padding: .6rem 1rem; }
+.top a { text-decoration: none; font-weight: 700; font-size: 1.05rem; }
+.top a:hover { color: var(--blood); text-decoration: line-through 3px; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  min-height: min(92vh, 900px);
+  display: grid; place-items: center;
+  overflow: hidden;
+  background: var(--ink);
+}
+.hero-photo {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 30% 35%;
+  filter: grayscale(1) contrast(1.6) brightness(.55);
+}
+.hero h1 { position: relative; margin: 0; width: min(88vw, 900px); }
+.logo {
+  width: 100%;
+  filter: drop-shadow(4px 6px 0 var(--ink));
+  animation: slam .5s cubic-bezier(.2, 1.6, .4, 1) both;
+}
+@keyframes slam { from { transform: scale(1.6) rotate(-6deg); opacity: 0; } }
+
+.socials { position: absolute; bottom: 2rem; display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0; }
+.socials a {
+  display: grid; place-items: center;
+  width: 3.25rem; height: 3.25rem;
+  background: var(--bone); color: var(--ink);
+  border-radius: 50%;
+  transform: rotate(-8deg);
+}
+.socials li:nth-child(2) a { transform: rotate(7deg); }
+.socials a:hover { background: var(--blood); color: var(--bone); }
+svg { width: 1.6rem; height: 1.6rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+svg .fill { fill: currentColor; }
+
+/* ---------- Sections ---------- */
+main > section { max-width: 1100px; margin: 0 auto; padding: clamp(3rem, 8vw, 6rem) 1rem; }
+.lede { margin: 0 0 2.5rem; color: var(--nicotine); }
+
+/* ---------- Shows: flyers taped to the wall ---------- */
+.flyers { list-style: none; margin: 0; padding: 0; display: grid; gap: 3rem 2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.flyer {
+  position: relative;
+  background: var(--bone);
+  color: var(--ink);
+  padding: 2.25rem 1.75rem 1.75rem;
+  clip-path: var(--torn);
+  transform: rotate(-1.5deg);
+}
+.flyer:nth-child(even) { transform: rotate(1.2deg); }
+/* Shadow goes on the list: a filter on the flyer itself would be cut off by its own clip-path */
+.flyers { filter: drop-shadow(6px 8px 0 rgba(0, 0, 0, .45)); }
+.flyer::before {
+  content: ""; position: absolute; top: 0; left: 50%;
+  width: 7rem; height: 1.6rem;
+  background: rgba(201, 164, 106, .8);
+  transform: translateX(-50%) rotate(-3deg);
+}
+.flyer-date { font-family: var(--head); font-size: clamp(2.5rem, 7vw, 3.5rem); line-height: .9; margin: 0 0 1rem; color: var(--blood); }
+.flyer-date span { display: block; font-size: .5em; color: var(--ink); }
+.flyer h3 { font-family: var(--body); font-weight: 700; font-size: 1.35rem; line-height: 1.2; margin-bottom: .5rem; }
+.flyer p { margin: 0; }
+.flyer.empty h3 { font-family: var(--head); font-weight: 400; }
+.stamp {
+  display: inline-block; margin-top: 1.25rem;
+  border: 3px solid var(--blood); color: var(--blood);
+  padding: .3rem .8rem; font-weight: 700; text-decoration: none;
+  transform: rotate(-4deg);
+}
+.stamp:hover { background: var(--blood); color: var(--bone); }
+
+.wall { position: relative; }
+.past { margin-top: 3rem; }
+.past summary { cursor: pointer; font-weight: 700; color: var(--nicotine); }
+.past ol { list-style: none; padding: 0; margin: 1rem 0 0; }
+.past li { padding: .4rem 0; border-bottom: 1px dashed var(--smoke); }
+.past time { color: var(--nicotine); margin-right: .75rem; }
+
+/* ---------- Music ---------- */
+.singles { display: grid; gap: 3rem; margin-top: 2rem; }
+.single { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 2rem; align-items: center; }
+.single:nth-child(even) { grid-template-columns: 1fr minmax(0, 340px); }
+.single:nth-child(even) .cover { order: 2; }
+.single h3 { font-size: clamp(2.25rem, 6vw, 3.5rem); color: var(--bone); }
+.single p { margin: .75rem 0 0; }
+.cover {
+  position: relative; padding: 0; border: 0; background: none;
+  box-shadow: 10px 10px 0 var(--blood);
+  transform: rotate(-2deg);
+}
+.single:nth-child(even) .cover { transform: rotate(2deg); box-shadow: -10px 10px 0 var(--blood); }
+.cover-play {
+  position: absolute; right: -1rem; bottom: -1rem;
+  width: 4.5rem; height: 4.5rem; border-radius: 50%;
+  background: var(--bone);
+  display: grid; place-items: center;
+}
+.cover-play::before { content: ""; border-left: 1.4rem solid var(--ink); border-top: .85rem solid transparent; border-bottom: .85rem solid transparent; margin-left: .35rem; }
+.cover.playing .cover-play::before { border: 0; width: 1.2rem; height: 1.5rem; margin: 0; border-left: .45rem solid var(--ink); border-right: .45rem solid var(--ink); }
+
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.btn {
+  display: inline-block; padding: .55rem 1.1rem;
+  background: var(--blood); color: var(--bone);
+  border: 2px solid var(--blood);
+  font-weight: 700; text-decoration: none;
+}
+.btn.ghost { background: none; color: var(--bone); border-color: var(--bone); }
+.btn:hover { background: var(--bone); color: var(--ink); border-color: var(--bone); }
+.btn.playing::after { content: "ing"; }
+
+#music .sub { margin-top: 4rem; font-size: 2.25rem; }
+.tracklist { list-style: none; margin: 1rem 0 0; padding: 0; max-width: 640px; counter-reset: t; }
+.tracklist button {
+  width: 100%; display: flex; gap: 1rem; align-items: baseline;
+  background: none; border: 0; border-bottom: 1px dashed var(--smoke);
+  padding: .8rem 0; text-align: left;
+}
+.tracklist button::before { counter-increment: t; content: counter(t); color: var(--nicotine); width: 1.5rem; }
+.tracklist .tl-title { flex: 1; }
+.tracklist .tl-len { color: var(--smoke); }
+.tracklist button:hover, .tracklist button.playing { color: var(--blood); }
+.tracklist button.playing::before { content: "▶"; color: var(--blood); }
+
+/* ---------- Photos ---------- */
+.gallery { list-style: none; margin: 2rem 0 0; padding: 0; columns: 3 260px; column-gap: 1rem; }
+.gallery li { break-inside: avoid; margin-bottom: 1rem; }
+.gallery button { padding: 0; border: 0; background: none; display: block; width: 100%; }
+.gallery img { width: 100%; filter: grayscale(1) contrast(1.35); }
+.gallery button:hover img, .gallery button:focus-visible img { filter: none; }
+
+dialog { padding: 0; border: 0; background: none; max-width: 94vw; max-height: 94vh; }
+dialog::backdrop { background: rgba(0, 0, 0, .9); }
+dialog img { max-height: 90vh; width: auto; }
+.close { position: absolute; top: .5rem; right: .5rem; background: var(--bone); color: var(--ink); border: 0; width: 2.5rem; height: 2.5rem; font-size: 1.25rem; font-weight: 700; }
+
+/* ---------- About: typed sheet ---------- */
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: center; }
+.about > img { filter: grayscale(1) contrast(1.4); aspect-ratio: 4 / 5; object-fit: cover; height: 100%; }
+.sheet {
+  background: var(--bone);
+  color: var(--ink);
+  padding: 2.5rem 2rem;
+  margin-left: -3rem;
+  transform: rotate(1.5deg);
+  box-shadow: 8px 10px 0 rgba(0, 0, 0, .45);
+}
+.sheet h2 { color: var(--blood); font-size: clamp(2.5rem, 6vw, 4rem); }
+.sheet p { max-width: 60ch; }
+
+footer { text-align: center; padding: 3rem 1rem 4rem; color: var(--smoke); font-size: .95rem; }
+footer p { margin: .25rem 0; }
+
+/* ---------- Sticky player: strip of gaffer tape ---------- */
+.player {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  display: flex; align-items: center; gap: .5rem;
+  padding: .6rem 1rem;
+  background: var(--ink);
+  border-top: 3px solid var(--blood);
+}
+.player[hidden] { display: none; }
+.pbtn { background: none; border: 0; padding: .4rem; display: grid; place-items: center; }
+.pbtn.big { background: var(--bone); color: var(--ink); border-radius: 50%; width: 2.8rem; height: 2.8rem; }
+.pbtn:hover { color: var(--blood); }
+.now { flex: 1; min-width: 0; display: grid; gap: .2rem; margin-left: .5rem; }
+#now-title { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.time { color: var(--nicotine); font-size: .9rem; white-space: nowrap; }
+input[type=range] { width: 100%; accent-color: var(--blood); }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 720px) {
+  .single, .single:nth-child(even) { grid-template-columns: 1fr; }
+  .single:nth-child(even) .cover { order: 0; }
+  .cover { max-width: 340px; }
+  .cover-play { right: .5rem; bottom: .5rem; }
+  .about { grid-template-columns: 1fr; }
+  .sheet { margin: -3rem .5rem 0; }
+  .time { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .logo { animation: none; }
+}
